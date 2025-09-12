@@ -1,26 +1,82 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Chatbox</title>
-  <link rel="stylesheet" href="style.css">
-</head>
-<body>
-  <div class="chat-container">
-    <h2>🔥 My Chatbox</h2>
-    <div id="chat-window"></div>
-    <form id="chat-form">
-      <input type="text" id="chat-input" placeholder="Type a message..." required>
-      <button type="submit">Send</button>
-    </form>
-  </div>
+body {
+  font-family: Arial, sans-serif;
+  background: #f0f2f5;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  margin: 0;
+}
 
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
+.chat-container {
+  width: 400px;
+  height: 500px;
+  display: flex;
+  flex-direction: column;
+  border: 1px solid #ccc;
+  border-radius: 10px;
+  overflow: hidden;
+  background: white;
+  box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
 
-  <!-- Script -->
-  <script src="script.js"></script>
-</body>
-</html>
+h2 {
+  margin: 0;
+  padding: 10px;
+  text-align: center;
+  background: #007bff;
+  color: white;
+}
+
+#chat-window {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  border-bottom: 1px solid #ccc;
+}
+
+.message {
+  background: #e1ffc7;
+  padding: 8px;
+  margin: 5px 0;
+  border-radius: 6px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.message span {
+  flex: 1;
+  word-break: break-word;
+}
+
+.message button {
+  margin-left: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+}
+
+#chat-form {
+  display: flex;
+}
+
+#chat-input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  outline: none;
+  border-top: 1px solid #ccc;
+}
+
+button[type="submit"] {
+  border: none;
+  padding: 10px 20px;
+  background: #007bff;
+  color: white;
+  cursor: pointer;
+}
+
+button[type="submit"]:hover {
+  background: #0056b3;
+}
