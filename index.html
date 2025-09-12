@@ -3,24 +3,60 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Firebase Chatbox</title>
-  <link rel="stylesheet" href="style.css">
+  <title>Static Chatbox</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+      background: #f0f0f0;
+    }
+    .chat-container {
+      width: 400px;
+      max-height: 600px;
+      display: flex;
+      flex-direction: column;
+      border: 1px solid #ccc;
+      border-radius: 10px;
+      background: white;
+      overflow: hidden;
+    }
+    #chat-window {
+      flex: 1;
+      padding: 10px;
+      overflow-y: auto;
+      border-bottom: 1px solid #ccc;
+    }
+    .message {
+      padding: 8px 12px;
+      margin: 6px 0;
+      border-radius: 6px;
+      max-width: 75%;
+      clear: both;
+    }
+    .user {
+      background: #e1ffc7;
+      align-self: flex-end;
+      float: right;
+    }
+    .other {
+      background: #d9edf7;
+      align-self: flex-start;
+      float: left;
+    }
+  </style>
 </head>
 <body>
   <div class="chat-container">
-    <h2>🔥 My Chatbox</h2>
-    <div id="chat-window"></div>
-    <form id="chat-form">
-      <input type="text" id="chat-input" placeholder="Type a message..." required>
-      <button type="submit">Send</button>
-    </form>
+    <div id="chat-window">
+      <!-- Messages go here -->
+      <div class="message user">Hello, this is my first message!</div>
+      <div class="message other">This is another message.</div>
+      <div class="message user">I update this file manually in GitHub.</div>
+    </div>
   </div>
-
-  <!-- Firebase -->
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-app.js"></script>
-  <script src="https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js"></script>
-
-  <!-- Script -->
-  <script src="script.js"></script>
 </body>
 </html>
