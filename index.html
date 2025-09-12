@@ -1,116 +1,94 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8"/>
-  <meta name="viewport" content="width=device-width,initial-scale=1"/>
-  <title>Login — Safecenter</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SafeCenter Login</title>
   <style>
-    :root{
-      --bg:#0f0f10; --panel:#151516; --muted:#9fa7b3; --accent:#0068d6;
-      --input-bg:#1f2022; --danger:#ff6b6b; --text:#eef;
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #121212;
+      color: #f5f5f5;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
     }
-    *{box-sizing:border-box}
-    body{
-      margin:0;min-height:100vh;display:flex;align-items:center;justify-content:center;
-      background:var(--bg);color:var(--text);font-family:Segoe UI,Roboto,Arial,sans-serif;
+    .login-container {
+      background: #1e1e1e;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 15px rgba(0,0,0,0.5);
+      width: 100%;
+      max-width: 400px;
+      text-align: center;
     }
-    .login-container{
-      width:94%;max-width:380px;background:var(--panel);border-radius:12px;padding:36px;
-      box-shadow:0 10px 30px rgba(0,0,0,.6);border:1px solid #222;text-align:center;
+    h2 {
+      margin-bottom: 20px;
     }
-    h2{margin:0 0 14px;font-size:1.35rem}
-    label{display:block;text-align:left;font-size:.9rem;color:var(--muted);margin-top:10px}
-    input[type="date"], input[type="password"]{
-      width:100%;padding:14px;border-radius:9px;border:1px solid #2b2b2b;
-      margin-top:6px;background:var(--input-bg);color:var(--text);font-size:1rem;
+    label {
+      display: block;
+      margin: 15px 0 5px;
+      text-align: left;
     }
-    input[type="date"]::-webkit-calendar-picker-indicator{filter:invert(1);cursor:pointer}
-    button{
-      width:100%;padding:13px;border-radius:9px;border:0;margin-top:16px;background:var(--accent);
-      color:white;font-size:1.05rem;cursor:pointer;
+    input {
+      width: 100%;
+      padding: 12px;
+      margin-bottom: 15px;
+      border-radius: 8px;
+      border: 1px solid #333;
+      background: #2a2a2a;
+      color: #fff;
+      font-size: 16px;
     }
-    button:active{transform:translateY(1px)}
-    .error{color:var(--danger);margin-top:12px;min-height:1.1em}
-    .hint{font-size:.85rem;color:var(--muted);margin-top:8px}
+    input:focus {
+      outline: none;
+      border-color: #4cafef;
+    }
+    button {
+      width: 100%;
+      padding: 12px;
+      border: none;
+      border-radius: 8px;
+      background: #4cafef;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #2196f3;
+    }
   </style>
 </head>
 <body>
-  <main class="login-container" aria-labelledby="login-title">
-    <h2 id="login-title">Sign in to Safecenter</h2>
+  <div class="login-container">
+    <h2>Login</h2>
+    <form id="loginForm">
+      <label for="birthdate">Birthdate:</label>
+      <input type="date" id="birthdate" required>
 
-    <form id="loginForm" autocomplete="off" novalidate>
-      <label for="birthdate">Birthdate</label>
-      <input id="birthdate" type="date" required aria-required="true" />
+      <label for="password">Password:</label>
+      <input type="password" id="password" placeholder="Enter password" required>
 
-      <label for="password">Password</label>
-      <input id="password" type="password" placeholder="Enter password" required aria-required="true" />
-
-      <button type="submit" id="loginBtn">Login</button>
-      <div class="error" id="errorMsg" role="status" aria-live="polite"></div>
-      <div class="hint">Use the calendar picker to choose your birthdate.</div>
+      <button type="submit">Login</button>
     </form>
-  </main>
+  </div>
 
   <script>
-    (function(){
-      // Fixed credentials (server-side is recommended for real use)
-      const EXPECTED = {
-        // stored in canonical YYYY-MM-DD form
-        birthdate: "1998-12-28",
-        password: "263333777777"
-      };
+    document.getElementById("loginForm").addEventListener("submit", function(e) {
+      e.preventDefault(); // Stop form refresh
 
-      const form = document.getElementById("loginForm");
-      const bdInput = document.getElementById("birthdate");
-      const pwInput = document.getElementById("password");
-      const err = document.getElementById("errorMsg");
+      const birthdate = document.getElementById("birthdate").value;
+      const password = document.getElementById("password").value;
 
-      // Robust normalize: support YYYY-MM-DD and MM/DD/YYYY (trim whitespace)
-      function normalizeDateString(s){
-        if(!s) return "";
-        s = s.trim();
-        // If already yyyy-mm-dd, return as-is
-        if(/^\d{4}-\d{2}-\d{2}$/.test(s)) return s;
-        // If mm/dd/yyyy convert to yyyy-mm-dd
-        const m = s.match(/^(\d{1,2})[\/\-](\d{1,2})[\/\-](\d{4})$/);
-        if(m){
-          const mm = m[1].padStart(2,'0');
-          const dd = m[2].padStart(2,'0');
-          const yyyy = m[3];
-          return `${yyyy}-${mm}-${dd}`;
-        }
-        return s;
+      // Match format: yyyy-mm-dd
+      if (birthdate === "1998-12-28" && password === "263333777777") {
+        window.location.href = "chat.html";
+      } else {
+        alert("Invalid credentials. Try again.");
       }
-
-      form.addEventListener("submit", function(ev){
-        ev.preventDefault();
-        err.textContent = ""; // clear
-
-        const bdRaw = bdInput.value || "";
-        const pwRaw = (pwInput.value || "").trim();
-
-        const bd = normalizeDateString(bdRaw);
-
-        // debug logs (you can open DevTools -> Console)
-        console.log("Login attempt — parsed birthdate:", bd, " password length:", pwRaw.length);
-
-        if(!bd || !pwRaw){
-          err.textContent = "Please fill both fields.";
-          return;
-        }
-
-        if(bd === EXPECTED.birthdate && pwRaw === EXPECTED.password){
-          // success: go to chat
-          // If chat.html is in same folder it will work; otherwise adjust path.
-          window.location.href = "chat.html";
-        } else {
-          err.textContent = "Invalid birthdate or password!";
-          // Helpful hint in console
-          console.warn("Login failed. Provided:", {bdRaw, bd, pwRawLength: pwRaw.length});
-        }
-      });
-    })();
+    });
   </script>
 </body>
 </html>
-
