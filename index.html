@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Static Chatbox</title>
+  <title>Static Chatbox with Timestamps</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -36,26 +36,41 @@
       border-radius: 6px;
       max-width: 75%;
       clear: both;
+      position: relative;
     }
     .user {
       background: #e1ffc7;
-      align-self: flex-end;
       float: right;
     }
     .other {
       background: #d9edf7;
-      align-self: flex-start;
       float: left;
+    }
+    .timestamp {
+      display: block;
+      font-size: 0.75em;
+      color: #666;
+      margin-top: 4px;
+      text-align: right;
     }
   </style>
 </head>
 <body>
   <div class="chat-container">
     <div id="chat-window">
-      <!-- Messages go here -->
-      <div class="message user">Hello, this is my first message!</div>
-      <div class="message other">This is another message.</div>
-      <div class="message user">I update this file manually in GitHub.</div>
+      <!-- Example messages -->
+      <div class="message user">
+        Hello, this is my first message!
+        <span class="timestamp">Sept 12, 2025 - 6:40 PM</span>
+      </div>
+      <div class="message other">
+        This is another message.
+        <span class="timestamp">Sept 12, 2025 - 6:42 PM</span>
+      </div>
+      <div class="message user">
+        I update this file manually in GitHub.
+        <span class="timestamp">Sept 12, 2025 - 6:45 PM</span>
+      </div>
     </div>
   </div>
 </body>
