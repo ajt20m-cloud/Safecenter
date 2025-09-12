@@ -6,13 +6,13 @@
   <title>Static Chatbox</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       display: flex;
       justify-content: center;
       align-items: center;
       min-height: 100vh;
       margin: 0;
-      background: #f0f0f0;
+      background: #e9eef3;
     }
     .chat-container {
       width: 100%;
@@ -21,39 +21,58 @@
       display: flex;
       flex-direction: column;
       border: 1px solid #ccc;
-      border-radius: 10px;
-      background: white;
+      border-radius: 12px;
+      background: #fff;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
       overflow: hidden;
     }
     #chat-window {
       flex: 1;
-      padding: 10px;
+      padding: 15px;
       overflow-y: auto;
-      border-bottom: 1px solid #ccc;
       display: flex;
       flex-direction: column;
+      scroll-behavior: smooth;
     }
     .date-label {
       text-align: center;
-      font-size: 0.85em;
-      color: #555;
-      margin: 10px 0;
+      font-size: 0.8em;
+      color: #666;
+      margin: 15px 0;
+      position: relative;
+    }
+    .date-label::before,
+    .date-label::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 35%;
+      height: 1px;
+      background: #ccc;
+    }
+    .date-label::before {
+      left: 0;
+    }
+    .date-label::after {
+      right: 0;
     }
     .message {
-      padding: 8px 12px;
+      padding: 10px 14px;
       margin: 6px 0;
-      border-radius: 6px;
+      border-radius: 18px;
       max-width: 75%;
       word-wrap: break-word;
-      clear: both;
+      line-height: 1.4;
     }
     .user {
-      background: #e1ffc7;
+      background: #daf8cb;
       align-self: flex-end;
+      border-bottom-right-radius: 4px;
     }
     .other {
-      background: #d9edf7;
+      background: #d0e6f7;
       align-self: flex-start;
+      border-bottom-left-radius: 4px;
     }
   </style>
 </head>
@@ -62,15 +81,22 @@
     <div id="chat-window">
       <!-- Example messages -->
       <div class="date-label">Sept 12, 2025</div>
-
       <div class="message user">Hello, this is my first message!</div>
       <div class="message other">This is another message.</div>
       <div class="message user">I update this file manually in GitHub.</div>
 
       <div class="date-label">Sept 13, 2025</div>
-
       <div class="message user">Another day, another message.</div>
+      <div class="message other">Looks nice on mobile too!</div>
     </div>
   </div>
+
+  <script>
+    // Auto-scroll to the bottom when page loads
+    const chatWindow = document.getElementById("chat-window");
+    window.onload = () => {
+      chatWindow.scrollTop = chatWindow.scrollHeight;
+    };
+  </script>
 </body>
 </html>
