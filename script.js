@@ -5,7 +5,8 @@ const firebaseConfig = {
   projectId: "chatbox-1dafe",
   storageBucket: "chatbox-1dafe.firebasestorage.app",
   messagingSenderId: "1014905322794",
-  appId: "1:1014905322794:web:63ce73964f69c89a8e3253"
+  appId: "1:1014905322794:web:63ce73964f69c89a8e3253",
+  measurementId: "G-LH6NQ1WEX3"
 };
 
 // Initialize Firebase
@@ -58,3 +59,4 @@ function editMessage(id, oldText) {
     db.collection("messages").doc(id).update({ text: newText });
   }
 }
+
