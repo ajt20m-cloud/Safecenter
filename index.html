@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Static Chatbox with Timestamps</title>
+  <title>Static Chatbox</title>
   <style>
     body {
       font-family: Arial, sans-serif;
@@ -15,8 +15,9 @@
       background: #f0f0f0;
     }
     .chat-container {
-      width: 400px;
-      max-height: 600px;
+      width: 100%;
+      max-width: 480px;
+      height: 90vh;
       display: flex;
       flex-direction: column;
       border: 1px solid #ccc;
@@ -29,29 +30,30 @@
       padding: 10px;
       overflow-y: auto;
       border-bottom: 1px solid #ccc;
+      display: flex;
+      flex-direction: column;
+    }
+    .date-label {
+      text-align: center;
+      font-size: 0.85em;
+      color: #555;
+      margin: 10px 0;
     }
     .message {
       padding: 8px 12px;
       margin: 6px 0;
       border-radius: 6px;
       max-width: 75%;
+      word-wrap: break-word;
       clear: both;
-      position: relative;
     }
     .user {
       background: #e1ffc7;
-      float: right;
+      align-self: flex-end;
     }
     .other {
       background: #d9edf7;
-      float: left;
-    }
-    .timestamp {
-      display: block;
-      font-size: 0.75em;
-      color: #666;
-      margin-top: 4px;
-      text-align: right;
+      align-self: flex-start;
     }
   </style>
 </head>
@@ -59,18 +61,15 @@
   <div class="chat-container">
     <div id="chat-window">
       <!-- Example messages -->
-      <div class="message user">
-        Hello, this is my first message!
-        <span class="timestamp">Sept 12, 2025 - 6:40 PM</span>
-      </div>
-      <div class="message other">
-        This is another message.
-        <span class="timestamp">Sept 12, 2025 - 6:42 PM</span>
-      </div>
-      <div class="message user">
-        I update this file manually in GitHub.
-        <span class="timestamp">Sept 12, 2025 - 6:45 PM</span>
-      </div>
+      <div class="date-label">Sept 12, 2025</div>
+
+      <div class="message user">Hello, this is my first message!</div>
+      <div class="message other">This is another message.</div>
+      <div class="message user">I update this file manually in GitHub.</div>
+
+      <div class="date-label">Sept 13, 2025</div>
+
+      <div class="message user">Another day, another message.</div>
     </div>
   </div>
 </body>
