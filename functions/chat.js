@@ -19,7 +19,8 @@ export async function onRequest(context) {
         status: 302,
         headers: {
           "Set-Cookie": "auth=1; Path=/; HttpOnly; Secure; SameSite=Strict",
-          "Location": "/chat.html",
+          "Location": "/chat-page.html",
+,
         },
       });
     }
@@ -85,3 +86,4 @@ export async function onRequest(context) {
     </html>
   `, { headers: { "Content-Type": "text/html" } });
 }
+
