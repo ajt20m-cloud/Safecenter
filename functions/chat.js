@@ -20,7 +20,6 @@ export async function onRequest(context) {
         headers: {
           "Set-Cookie": "auth=1; Path=/; HttpOnly; Secure; SameSite=Strict",
           "Location": "/chat-page.html",
-,
         },
       });
     }
@@ -86,4 +85,5 @@ export async function onRequest(context) {
     </html>
   `, { headers: { "Content-Type": "text/html" } });
 }
+
 
