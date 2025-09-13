@@ -1,18 +1,20 @@
 export async function onRequest(context) {
-  const PASSWORD = context.env.CHAT_PASSWORD; // we’ll set this in Cloudflare later
+  const PASSWORD = context.env.CHAT_PASSWORD;
   const { request } = context;
 
-  // check if already logged in (cookie exists)
+  // Check cookie (already logged in)
   const cookie = request.headers.get("Cookie") || "";
   if (cookie.includes("auth=1")) {
-    return context.next();
+    return context.next(); // let them see chat.html
   }
 
-  // if it's a POST (login attempt)
+  // Handle login form submission
   if (request.method === "POST") {
     const formData = await request.formData();
     const pass = formData.get("password");
+
     if (pass === PASSWORD) {
+      // Set cookie + redirect to chat.html
       return new Response(null, {
         status: 302,
         headers: {
@@ -23,7 +25,7 @@ export async function onRequest(context) {
     }
   }
 
-  // if not logged in → show login page
+  // Show login form
   return new Response(`
     <!DOCTYPE html>
     <html>
@@ -31,11 +33,46 @@ export async function onRequest(context) {
       <meta charset="UTF-8">
       <title>Chat Login</title>
       <style>
-        body {background:#121212;color:#fff;display:flex;justify-content:center;align-items:center;height:100vh;font-family:sans-serif;}
-        form {background:#1e1e1e;padding:30px;border-radius:10px;box-shadow:0 0 15px rgba(0,0,0,0.5);}
-        input {padding:10px;width:100%;margin-bottom:15px;border-radius:6px;border:none;background:#2c2c2c;color:#fff;}
-        button {padding:10px;width:100%;border:none;border-radius:6px;background:#007bff;color:#fff;font-size:1em;cursor:pointer;}
-        button:hover {background:#0056b3;}
+        body {
+          background: #121212;
+          color: #fff;
+          font-family: Arial, sans-serif;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+          margin: 0;
+        }
+        form {
+          background: #1e1e1e;
+          padding: 30px;
+          border-radius: 12px;
+          box-shadow: 0 0 15px rgba(0,0,0,0.5);
+          text-align: center;
+          width: 90%;
+          max-width: 400px;
+        }
+        input {
+          width: 100%;
+          padding: 12px;
+          margin-bottom: 15px;
+          border-radius: 8px;
+          border: none;
+          background: #2c2c2c;
+          color: #fff;
+          font-size: 16px;
+        }
+        button {
+          width: 100%;
+          padding: 12px;
+          border: none;
+          border-radius: 8px;
+          background: #007bff;
+          color: #fff;
+          font-size: 16px;
+          cursor: pointer;
+        }
+        button:hover { background: #0056b3; }
       </style>
     </head>
     <body>
