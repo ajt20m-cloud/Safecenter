@@ -82,7 +82,7 @@
 
       if (birthdate === correctBirthdate) {
         sessionStorage.setItem("unlocked", "true");
-        location.href = "/chat";
+        window.location.href = "/chat";
       } else {
         document.getElementById("error").textContent = "Invalid birthdate!";
       }
@@ -90,4 +90,5 @@
   </script>
 </body>
 </html>
+
 
