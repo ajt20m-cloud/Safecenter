@@ -16,43 +16,16 @@
       align-items: center;
       height: 100vh;
     }
-    .login-box, .chat-container {
+    .chat-container {
       background: #1e1e1e;
       padding: 20px;
       border-radius: 15px;
       box-shadow: 0px 4px 12px rgba(0,0,0,0.3);
-      text-align: center;
-      width: 90%;
-      max-width: 400px;
-    }
-    input {
-      width: 100%;
-      padding: 12px;
-      margin: 10px 0;
-      border-radius: 10px;
-      border: none;
-      outline: none;
-      font-size: 16px;
-    }
-    button {
-      background: #4a90e2;
-      border: none;
-      padding: 10px 20px;
-      border-radius: 10px;
-      color: white;
-      cursor: pointer;
-      font-size: 16px;
-      margin-top: 10px;
-    }
-    button:hover {
-      background: #357ABD;
-    }
-    .chat-container {
-      display: none;
+      display: flex;
       flex-direction: column;
       height: 90vh;
       max-width: 600px;
-      width: 100%;
+      width: 95%;
     }
     .chat-box {
       flex: 1;
@@ -68,18 +41,30 @@
     }
     .input-row input {
       flex: 1;
+      padding: 12px;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      font-size: 16px;
+      background: #2a2a2a;
+      color: #fff;
+    }
+    button {
+      background: #4a90e2;
+      border: none;
+      padding: 12px 20px;
+      border-radius: 10px;
+      color: white;
+      cursor: pointer;
+      font-size: 16px;
+    }
+    button:hover {
+      background: #357ABD;
     }
   </style>
 </head>
 <body>
-  <div class="login-box" id="login-box">
-    <h2>Enter Password</h2>
-    <input type="password" id="password" placeholder="Enter password">
-    <button onclick="checkPassword()">Unlock Chat</button>
-    <p id="error" style="color: red; display: none;">Incorrect password</p>
-  </div>
-
-  <div class="chat-container" id="chat-container">
+  <div class="chat-container">
     <div class="chat-box" id="chat-box"></div>
     <div class="input-row">
       <input type="text" id="message" placeholder="Type a message...">
@@ -88,26 +73,9 @@
   </div>
 
   <script>
-    const correctPassword = "263333777777"; // your fixed password
-
-    // Redirect if user tries to skip login.html
+    // 🔒 Redirect to login.html if not unlocked
     if (!sessionStorage.getItem("unlocked")) {
-      document.getElementById("chat-container").style.display = "none";
-      document.getElementById("login-box").style.display = "block";
-    } else {
-      document.getElementById("chat-container").style.display = "flex";
-      document.getElementById("login-box").style.display = "none";
-    }
-
-    function checkPassword() {
-      const entered = document.getElementById("password").value;
-      if (entered === correctPassword) {
-        sessionStorage.setItem("unlocked", "true");
-        document.getElementById("login-box").style.display = "none";
-        document.getElementById("chat-container").style.display = "flex";
-      } else {
-        document.getElementById("error").style.display = "block";
-      }
+      window.location.href = "index.html";
     }
 
     function sendMessage() {
