@@ -81,7 +81,7 @@
       const correctBirthdate = "1998-12-28"; // yyyy-mm-dd
 
       if (birthdate === correctBirthdate) {
-        // ✅ Redirect to /chat (Cloudflare function will require CHAT_PASSWORD)
+        // ✅ Redirect to /chat (Cloudflare function will ask password)
         window.location.href = "/chat";
       } else {
         document.getElementById("error").textContent = "Invalid birthdate!";
