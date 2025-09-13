@@ -5,7 +5,8 @@ export async function onRequest(context) {
   // Check cookie (already logged in)
   const cookie = request.headers.get("Cookie") || "";
   if (cookie.includes("auth=1")) {
-    return context.next(); // let them see chat.html
+    // Serve the real chat page
+    return context.next();
   }
 
   // Handle login form submission
@@ -14,7 +15,7 @@ export async function onRequest(context) {
     const pass = formData.get("password");
 
     if (pass === PASSWORD) {
-      // Set cookie + redirect to chat.html
+      // Set cookie + redirect to chat-page.html
       return new Response(null, {
         status: 302,
         headers: {
@@ -25,7 +26,7 @@ export async function onRequest(context) {
     }
   }
 
-  // Show login form
+  // Show password form
   return new Response(`
     <!DOCTYPE html>
     <html>
@@ -85,5 +86,3 @@ export async function onRequest(context) {
     </html>
   `, { headers: { "Content-Type": "text/html" } });
 }
-
-
